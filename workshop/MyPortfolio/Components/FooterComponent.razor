@@ -41,9 +41,8 @@
     [Parameter, EditorRequired]
     public HttpClient? Http { get; set; } = default!;
 
-[Parameter, EditorRequired]
-public string? BackgroundColor { get; set; } = default!;
-
+    [Parameter, EditorRequired]
+    public string? BackgroundColor { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
