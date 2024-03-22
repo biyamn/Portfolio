@@ -53,9 +53,9 @@ jobs:
         }
 
     - name: Restore NuGet packages
-      shell: bash
-      run: |
-      dotnet restore ./workshop
+        shell: bash
+        run: |
+        dotnet restore ./workshop
 
     - name: Build solution
         shell: bash
