@@ -53,24 +53,24 @@ jobs:
         }
 
     - name: Restore NuGet packages
-    shell: bash
-    run: |
-    dotnet restore ./workshop
+      shell: bash
+      run: |
+      dotnet restore ./workshop
 
-- name: Build solution
-    shell: bash
-    run: |
-    dotnet build ./workshop -c Release
+    - name: Build solution
+        shell: bash
+        run: |
+        dotnet build ./workshop -c Release
 
-- name: Test solution
-    shell: bash
-    run: |
-    dotnet test ./workshop -c Release
+    - name: Test solution
+        shell: bash
+        run: |
+        dotnet test ./workshop -c Release
 
-- name: Publish artifact
-    shell: bash
-    run: |
-    dotnet publish ./workshop/MyPortfolio -c Release -o published
+    - name: Publish artifact
+        shell: bash
+        run: |
+        dotnet publish ./workshop/MyPortfolio -c Release -o published
 
 
     - name: Upload artifact for web
