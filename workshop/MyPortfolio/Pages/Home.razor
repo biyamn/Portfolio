@@ -30,6 +30,8 @@
     </div>
 </section>
 
+@* ⬇️⬇️⬇️ Add codes below ⬇️⬇️⬇️ *@
+
 <section class="light" id="about">
     @if (heroAboutMe is not null)
     {
@@ -57,6 +59,36 @@
     </div>
 </section>
 
+<section class="light" id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="portfolio-container">
+    @if (projects is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="portfolio-hero">
+            @if (heroPortfolio is not null)
+            {
+                <img src="@(heroPortfolio.Src)" style="height: 90%; width: 100%; object-fit: cover;" alt="@(heroPortfolio.Alt)" />
+            }
+        </div>
+        <div class="container">
+            @foreach (var project in projects)
+            {
+                <div class="box" key="@project.Title">
+                    <a href="@project.Url" target="_blank" rel="noopener noreferrer">
+                        <h3 style="flex-basis: 40px;">@project.Title</h3>
+                    </a>
+                    <p class="small">@project.Description</p>
+                </div>
+            }
+        </div>
+    }
+    </div>
+</section>
+
 @code {
     private SiteProperties? property;
     private HeroImage? heroHome;
@@ -64,6 +96,9 @@
     private AboutMe? aboutMe;
     private HeroImage? heroAboutMe;
 
+    private List<Project>? projects;
+    private HeroImage? heroPortfolio;
+    
     protected override async Task OnInitializedAsync()
     {
         property = await Http.GetFromJsonAsync<SiteProperties>("sample-data/siteproperties.json");
@@ -73,5 +108,8 @@
 
         aboutMe = await Http.GetFromJsonAsync<AboutMe>("sample-data/aboutme.json");
         heroAboutMe = heros.SingleOrDefault(h => h.Name == "about");
+
+        projects = await Http.GetFromJsonAsync<List<Project>>("sample-data/projects.json");
+        heroPortfolio = heros.SingleOrDefault(h => h.Name == "portfolio");
     }
 }
